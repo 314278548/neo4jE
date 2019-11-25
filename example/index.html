@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<!--<script src="neovis.js"></script>-->
+<script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script>
+<script src="./neo4jE.js"></script>
+<body>
+<div id="echarts" style="width:100vw;height:100vh;background-color: white;"></div>
+</body>
+
+
+<script>
+	var graph = new Neo4jE.default({
+		console_debug: true,
+		server_url: 'bolt://xxxxx:7687',
+		server_user: 'neo4j',
+		server_password: 'Neo4j_hthcorP+666',
+		labels: {
+			'卫星': {'caption': 'Model'},
+			'国家': {'caption': 'Model'},
+			'坦克': {'caption': 'Model'},
+			'导弹': {'caption': 'Model'},
+			'战舰': {'caption': 'Model'},
+			'机构': {'caption': 'Model'},
+			'枪械': {'caption': 'Model'},
+			'火炮': {'caption': 'Model'},
+			'爆炸物': {'caption': 'Model'},
+			'飞机': {'caption': 'Model'},
+		},
+		relationships: {
+			'制造': {thickness: '0.1'},
+			'前型': {thickness: '0.1'},
+			'同型': {thickness: '0.1'},
+			'建立': {thickness: '0.1'},
+			'装备': {thickness: '0.1'},
+			'设计': {thickness: '0.1'}
+		},
+		option: {
+			// animation: true,
+			title: {
+				text: 'Les Miserables',
+				subtext: 'Default layout',
+				top: 'bottom',
+				left: 'right'
+			},
+			tooltip: {
+				trigger: 'item',
+
+			},
+			legend: [],
+			series: [
+				{
+					focusNodeAdjacency: true,
+					edgeSymbol: ['circle', 'arrow'],
+					symbolSize: 66,
+					// symbolSize: function (value, params) {
+					//     var ids = params.data.sub_node_ids;
+					//     if (ids) {
+					//         return 66 + (Object.keys(ids).length * 1.2);
+					//     }
+					//     return 66;
+					// },
+					name: 'Les Miserables',
+					type: 'graph',
+					layout: 'force',
+					data: [],
+					edges: [],
+					categories: [],
+					roam: true,
+					itemStyle: {
+						normal: {
+							borderColor: '#fff',
+							borderWidth: 1,
+							shadowBlur: 10,
+							shadowColor: 'rgba(0, 0, 0, 0.3)'
+						}
+					},
+					// animation: false,
+					force: { // 力引导图基本配置
+						initLayout: 'circular',//力引导的初始化布局，默认使用xy轴的标点
+						layoutAnimation: true,
+						repulsion: [160,5000],
+						// gravity: 0,
+						edgeLength: [30,1000]
+					},
+					circular: {
+						rotateLabel: true
+					},
+					draggable: true,
+					label: {
+						normal: {
+							position: 'inside',
+							show: true
+						}
+					},
+					edgeLabel: {
+						show: true,
+						position: 'middle',
+						formatter: p => p.data.label
+					},
+					lineStyle: {
+						color: 'source',
+						width: 0.5,
+						curveness: 0.3,
+						opacity: 0.7
+					},
+					tooltip: {
+						formatter: p => {
+							return p.data.title;
+						}
+					}
+				}
+			]
+		},
+		instance: echarts.init(document.getElementById('echarts'))
+	});
+
+	graph.render('match(a:国家)-[r1]->(b:机构) -[r2:设计]->(c)return *');
+</script>
+
+</html>
