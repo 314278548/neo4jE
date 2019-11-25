@@ -1,7 +1,7 @@
 {
   "name": "neograph.js",
   "version": "1.2.1",
-  "description": "Graph visualizations powered by echarts.js with data from Neo4jE.",
+  "description": "Graph visualizations powered by echarts.js with data from Neo4jE.js",
   "main": "./dist/neo4jE.js",
   "module": "./dist/neo4jE-without-dependencies.js",
   "scripts": {
