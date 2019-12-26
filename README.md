@@ -1,4 +1,4 @@
-## This is a util provide Graph visualizations powerd by echarts.js  data
+## This is a util provide Graph visualizations powerd by echarts.js
 
 ![截图](example/screenshot1.png)
 
