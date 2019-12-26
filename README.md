@@ -1,4 +1,4 @@
-## Graph visualizations powerd by echarts.js with data form Neo4jE.js
+## This is a util provide Graph visualizations powerd by echarts.js  data
 
 ![截图](example/screenshot1.png)
 
